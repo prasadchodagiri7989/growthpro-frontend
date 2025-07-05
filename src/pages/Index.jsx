@@ -4,11 +4,22 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BusinessForm from "../components/BusinessForm";
 import BusinessCard from "../components/BusinessCard";
+import StartupNotice from "../components/StartupNotice"; // adjust path as needed
+
 
 export default function Index() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+  const [showNotice, setShowNotice] = useState(false);
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem("hasSeenRenderMessage");
+    if (!seen) {
+      setShowNotice(true);
+      sessionStorage.setItem("hasSeenRenderMessage", "true");
+    }
+  }, []);
 
 
   useEffect(() => {
@@ -51,28 +62,32 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white transition-colors duration-300 flex flex-col">
-      <Navbar />
+    <>
+      {showNotice && <StartupNotice onClose={() => setShowNotice(false)} />}
 
-      <main className="flex-grow px-6">
-        <h1 className="text-3xl font-bold text-center mt-10 mb-6 text-blue-400">
-          Business SEO Dashboard
-        </h1>
+      <div className="min-h-screen bg-gray-900 text-white transition-colors duration-300 flex flex-col">
+        <Navbar />
 
-        <BusinessForm onSubmit={handleFormSubmit} />
+        <main className="flex-grow px-6">
+          <h1 className="text-3xl font-bold text-center mt-10 mb-6 text-blue-400">
+            Business SEO Dashboard
+          </h1>
 
-        {loading && (
-          <p className="text-center mt-4 text-blue-400">
-            Loading...
-          </p>
-        )}
+          <BusinessForm onSubmit={handleFormSubmit} />
 
-        {data && !loading && (
-          <BusinessCard data={data} onRegenerate={regenerateHeadline} />
-        )}
-      </main>
+          {loading && (
+            <p className="text-center mt-4 text-blue-400">
+              Loading...
+            </p>
+          )}
 
-      <Footer />
-    </div>
+          {data && !loading && (
+            <BusinessCard data={data} onRegenerate={regenerateHeadline} />
+          )}
+        </main>
+
+        <Footer />
+      </div>
+    </>
   );
 }
