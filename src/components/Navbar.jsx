@@ -1,70 +1,66 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react"; // Optional: install lucide-react for icons
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md px-6 py-4">
-      <div className="flex justify-between items-center">
-        {/* Logo */}
+    <nav className="bg-white dark:bg-gray-900 shadow-md py-4 px-6">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between">
+        {/* Brand */}
         <h1 className="text-xl font-bold text-blue-700 dark:text-blue-400">
           GrowthPro<span className="text-green-500">AI</span>
         </h1>
 
-        {/* Hamburger Menu Button */}
+        {/* Hamburger (mobile only) */}
         <button
-          className="sm:hidden text-gray-700 dark:text-gray-300"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
+          onClick={() => setIsOpen(!isOpen)}
+          className="sm:hidden text-gray-700 dark:text-gray-300 focus:outline-none"
         >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          ☰
         </button>
-      </div>
 
-      {/* Menu Links */}
-      <ul
-        className={`mt-4 sm:mt-0 flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-gray-700 dark:text-gray-300 ${
-          menuOpen ? "block" : "hidden sm:flex"
-        }`}
-      >
-        <li>
-          <a
-            href="/"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://prasadchodagiri-portfolio.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            About Me
-          </a>
-        </li>
-        <li>
-          <a
-            href="/project-description"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            Project Description
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/yourusername/growthpro-dashboard"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            GitHub ↗
-          </a>
-        </li>
-      </ul>
+        {/* Nav Items */}
+        <ul
+          className={`${isOpen ? "block" : "hidden"
+            } w-full space-y-3 sm:space-y-0 sm:flex sm:items-center sm:w-auto sm:space-x-6 text-sm text-gray-700 dark:text-gray-300 mt-4 sm:mt-0`}
+        >
+          <li>
+            <a
+              href="/"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition block"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://prasadchodagiri-portfolio.vercel.app/"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition block"
+              target="_blank"
+            >
+              About Me
+            </a>
+          </li>
+          <li>
+            <a
+              href="/project-description"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition block"
+            >
+              Project Description
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/yourusername/growthpro-dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition block"
+            >
+              GitHub ↗
+            </a>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }

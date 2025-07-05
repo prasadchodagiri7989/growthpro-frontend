@@ -19,10 +19,10 @@ export default function Index() {
     setLoading(true);
     try {
       const res = await fetch(`${BACKEND_URL}/business-data`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ name, location }),
-});
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, location }),
+      });
 
       const result = await res.json();
       setData({ ...result, name, location });
@@ -37,9 +37,9 @@ export default function Index() {
     if (!data?.name || !data?.location) return;
     setLoading(true);
     try {
-const res = await fetch(
-  `${BACKEND_URL}/regenerate-headline?name=${data.name}&location=${data.location}`
-);
+      const res = await fetch(
+        `${BACKEND_URL}/regenerate-headline?name=${data.name}&location=${data.location}`
+      );
 
       const result = await res.json();
       setData((prev) => ({ ...prev, headline: result.headline }));
