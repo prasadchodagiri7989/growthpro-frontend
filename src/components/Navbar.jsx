@@ -51,7 +51,7 @@ export default function Navbar() {
           </li>
           <li>
             <a
-              href="https://github.com/yourusername/growthpro-dashboard"
+              href="https://github.com/prasadchodagiri7989/growthpro-assignment"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-600 dark:hover:text-blue-400 transition block"
